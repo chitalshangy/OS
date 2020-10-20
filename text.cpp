@@ -1,6 +1,7 @@
 #include<iostream>
 using namespace std;
 int main(){
-    cout<<"Process okay!"<<endl;
+    cout<<"childProcess okay!"<<endl;
+    cout<<"childProcess ended!"<<endl;
     return 0;
 }
