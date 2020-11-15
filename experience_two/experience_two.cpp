@@ -17,12 +17,12 @@ int main() {
     m_S_Full = CreateSemaphore(NULL, 0, N, NULL);
     m_M_Mutex = CreateSemaphore(NULL, 1, 1, NULL);
     //新建N个生产者以及消费者线程
-    for (int n = 0; n < N; ++n) {
+    for (int n = 0; n < N-2; ++n) {
         CreateThread(NULL, 0, Consumer, NULL, 0, NULL);
         CreateThread(NULL, 0, Producer, NULL, 0, NULL);
     }
     //主进程睡眠一段时间
-    Sleep(100);
+    Sleep(30);
     return 0;
 }
 
