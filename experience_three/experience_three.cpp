@@ -22,29 +22,6 @@ void out_Path();
 //判断进程i请求新资源后当前是否安全
 void P_request();
 
-/*
-请输入4类资源数目：
-3 14 12 12
-请分别输入5个进程所需要4类资源数目：
-Process0:0 0 1 2
-Process1:1 7 5 0
-Process2:2 3 5 6
-Process3:0 6 5 2
-Process4:0 6 5 6
-输入每个进程已经分配的各类资源数：
-Process0:0 0 1 2
-Process1:1 0 0 0
-Process2:1 3 5 4
-Process3:0 6 3 2
-Process4:0 0 1 4
-
-1
-
-0 4 2 0
-
-
-*/
-
 int main() {
     //初始化
     cout << "请输入" << resource_NUM << "类资源数目：" << endl;
@@ -81,13 +58,12 @@ int main() {
         }
     }
 
-    /*
     cout << "各个资源空闲数目：" << endl;
     for (int i = 0; i < resource_NUM; ++i) {
         cout << Available[i] << " ";
     }
     cout << endl;
-    */
+    
     if (isSafe()) {
         cout << "当前进程可安全执行！" << endl;
         out_Path();
@@ -97,9 +73,9 @@ int main() {
     }
 
     //进行新请求处理
-    while (1) {
+    //while (1) {
         P_request();
-    }
+    //}
     
 	return 0;
 }
@@ -166,20 +142,24 @@ void P_request() {
         cin >> Request[i];
     }
     for (int i = 0; i < resource_NUM; ++i) {
+        //判断新请求的资源是否在合理范围内
         if (Request[i] > Need[p][i]) {
             cout << "当前进程贪心！" << endl;
             return;
         }
+        //判断新请求的资源是否可行
         if (Request[i] > Available[i]) {
             cout << "不安全，不允许请求！" << endl;
             return;
         }
     }
+    //资源分配
     for (int i = 0; i < resource_NUM; ++i) {
         Available[i] -= Request[i];
         Alloc[p][i] += Request[i];
         Need[p][i] -= Request[i];
     }
+    //如果进程安全，则进行资源分配
     if (isSafe()) {
         cout << "进程可安全执行，允许请求资源！" << endl;
         out_Path();
