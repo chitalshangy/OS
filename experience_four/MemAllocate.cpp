@@ -141,13 +141,13 @@ void CMemAllocate::DelAJob(int JobIndex) {
 }
 
 /*
-ĞÂÔöÒ»¸öbreak£¬ÔÚ·ÖÅäÍêµ±Ç°ÄÚ´æºóÌø³öÑ­»·£¬·ÖÅäÏÂÒ»¸ö
+ÅĞ¶ÏµÄÊ±ºò¼ÓÉÏ=
 */
 void CMemAllocate::AllocateMem_FirstAdapt(CMemAllocate::JCBInfo& job)//ÊµÏÖÁËÊ×´ÎÊÊÅäËã·¨
 {
 	for (MemoryBlock * p = m_MemList; p != 0; p=p->nextPointer)
 	{
-		if (job.JobLength < p->BlockLength && p->JobIndex == 0)			//Èç¹û×÷ÒµĞèÒª¿Õ¼äĞ¡ÓÚÄÚ´æ¿é¿Õ¼ä£¬·ÖÅä
+		if (job.JobLength <= p->BlockLength && p->JobIndex == 0)			//Èç¹û×÷ÒµĞèÒª¿Õ¼äĞ¡ÓÚÄÚ´æ¿é¿Õ¼ä£¬·ÖÅä
 		{
 			MemoryBlock * tmpMemBlock = new MemoryBlock;
 			tmpMemBlock ->BlockLength = job.JobLength;
@@ -167,9 +167,6 @@ void CMemAllocate::AllocateMem_FirstAdapt(CMemAllocate::JCBInfo& job)//ÊµÏÖÁËÊ×´
 				p->prePointer->nextPointer = tmpMemBlock;
 			}
 			p ->prePointer = tmpMemBlock;
-			
-			//ĞÂÔöÒ»¸öbreak£¬ÔÚ·ÖÅäÍêµ±Ç°ÄÚ´æºóÌø³öÑ­»·£¬·ÖÅäÏÂÒ»¸ö
-			break;
 		}
 		else
 		{
