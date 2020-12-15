@@ -141,7 +141,7 @@ void CMemAllocate::DelAJob(int JobIndex) {
 }
 
 /*
-ÅÐ¶ÏµÄÊ±ºò¼ÓÉÏ=
+ÅÐ¶ÏµÄÊ±ºò¼ÓÉÏ=£¬·ÖÅäÄÚ´æ½áÊøºóÌí¼ÓÒ»¸öbreak£¬·ÀÖ¹Æä¼ÌÐø·ÖÅä
 */
 void CMemAllocate::AllocateMem_FirstAdapt(CMemAllocate::JCBInfo& job)//ÊµÏÖÁËÊ×´ÎÊÊÅäËã·¨
 {
@@ -167,6 +167,7 @@ void CMemAllocate::AllocateMem_FirstAdapt(CMemAllocate::JCBInfo& job)//ÊµÏÖÁËÊ×´
 				p->prePointer->nextPointer = tmpMemBlock;
 			}
 			p ->prePointer = tmpMemBlock;
+			break;
 		}
 		else
 		{
